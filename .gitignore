@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Environment
+.env
+
+# Coverage
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+.venv/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Others
+check/

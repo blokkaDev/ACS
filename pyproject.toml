@@ -1,0 +1,24 @@
+[project]
+name= "acs-2"
+version= "0.1.0"
+
+description= "ACS IS A system that allows to build a personal Cluster in the local network whitout powerfull machines"
+readme= "README.md"
+authors= [
+    { name= "blokkaDev"}
+]
+requires-python= ">=3.14"
+dependencies= [
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+    "pydantic-settings",
+]
+
+
+[project.scripts]
+acs-2= "acs_2:main"
+
+[build-system]
+requires= ["uv_build>=0.12.5,<0.13.0"]
+build-backend= "uv_build"
