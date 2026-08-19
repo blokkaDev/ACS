@@ -1,6 +1,6 @@
 class Worker:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    def setup(self, data):
+    def setup(self, data) -> dict:
         return data

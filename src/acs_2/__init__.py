@@ -12,19 +12,20 @@ Worker= Worker()
 def main() -> None:
     Configs.load()
 
-    if check(data=Database.load(
-            {
+    database_status= status(data=Database.connect(
+            load={
                 "password": Configs.database_password(),
                 "user": Configs._DATABASE_USER,
                 "url": Configs._DATABASE_URL
             }
         )
-    ):
+    )
+    if database_status["status"]:
         print("Database loaded")
-
-        Database.test()
+    
+        print(status(Database.test())["message"])
     else:
-        print("Error loading the database")
+        print(f"Error loading the database: {database_status["message"]}")
 
     if not Configs._IS_MANAGER and Configs._IS_MANAGER!= None:
         Worker.setup(
@@ -37,7 +38,36 @@ def main() -> None:
     
 def check(data: dict) -> bool:
     if data.get("state", False) and not data.get("error", None):
-        if data.get("succeses", None)== data.get("total", None):
+        if data.get("successes", 0)== data.get("total", 1):
             return True
 
     return False
+
+def status(data: dict) -> dict:
+    state= False
+    success= False
+    message= None
+    error= None
+    if data.get("state", False):
+        state= True
+        message= data.get("message", message)
+
+    if data.get("successes", 0)== data.get("total", 1):
+        success= True
+
+    if data.get("error", False):
+        state= False
+        message= data.get("error", message)
+        error= data.get("error", None)
+
+    check_r= check(data=data)
+
+    return {
+        "more": {
+            "state": state,
+            "success": success
+        },
+        "status": success and state and not error and check_r,
+        "check": check_r,
+        "message": message
+    }

@@ -64,7 +64,7 @@ class Configs:
 
             return {
                 "state": True,
-                "succeses": num_successes,
+                "successes": num_successes,
                 "errors": num_errors,
                 "total": num_successes + num_errors
             }
@@ -74,7 +74,7 @@ class Configs:
                 "error": e
             }
 
-    def check(self, var):
+    def check(self, var) -> bool:
         if var is not None:
             self.num_successes+= 1
             return True
