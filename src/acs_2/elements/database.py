@@ -14,8 +14,11 @@ class Database:
                 pool_pre_ping=True
             )
 
-            return self.test()
-        except create_engine.sqlalchemy.exc.NoSuchModuleError as e:
+            test= self.test()
+            test["message"]= "Database connected successfully!"
+
+            return test
+        except Exception as e:
             return {
                 "state": False,
                 "error": e

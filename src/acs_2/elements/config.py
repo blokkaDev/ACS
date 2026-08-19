@@ -37,13 +37,13 @@ class Configs:
             else:
                 self._IS_MANAGER= False
 
-            self.__DEVICE_TOKEN= str(os.getenv('DEVICE_TOKEN', None))
-            self.__DATABASE_PASSWORD= str(os.getenv('DATABASE_PASSWORD', None))
+            self.__DEVICE_TOKEN= os.getenv('DEVICE_TOKEN', None)
+            self.__DATABASE_PASSWORD= os.getenv('DATABASE_PASSWORD', None)
 
             self._DATABASE_USER= str(os.getenv('DATABASE_USER', None))
             self._DATABASE_URL= str(os.getenv('DATABASE_URL', None))
             
-            self._PORT= str(os.getenv('DEVICE_PORT', self._PORT))
+            self._PORT= os.getenv('DEVICE_PORT', self._PORT)
 
             #Let's count the errors and the successes of the venv loading
             num_successes= 0
